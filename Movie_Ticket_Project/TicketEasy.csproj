@@ -71,7 +71,9 @@
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Default.aspx" />
-    <Content Include="profileInput.aspx" />
+    <Content Include="ProfileInput.aspx" />
+    <Content Include="Movies.aspx" />
+    <Content Include="Service.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -85,12 +87,26 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="profileInput.aspx.cs">
-      <DependentUpon>profileInput.aspx</DependentUpon>
+    <Compile Include="ProfileInput.aspx.cs">
+      <DependentUpon>ProfileInput.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="profileInput.aspx.designer.cs">
-      <DependentUpon>profileInput.aspx</DependentUpon>
+    <Compile Include="ProfileInput.aspx.designer.cs">
+      <DependentUpon>ProfileInput.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Movies.aspx.cs">
+      <DependentUpon>Movies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Movies.aspx.designer.cs">
+      <DependentUpon>Movies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service.aspx.cs">
+      <DependentUpon>Service.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service.aspx.designer.cs">
+      <DependentUpon>Service.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="profileInput.aspx.cs" Inherits="Movie_Ticket_Project.WebForm2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProfileInput.aspx.cs" Inherits="Movie_Ticket_Project.WebForm2" %>
 
 <!DOCTYPE html>
 
@@ -10,11 +10,7 @@
     <form id="form1" runat="server">
         <div>
             
-            <h1>Please, fill out a form below.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h1>
-            <p>&nbsp;</p>
-            <a href="Default.aspx">Back to login page.</a>
-            <br />
-            <br />
+            <h1>Please, fill out the form below.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h1>
             <br />
             <asp:Label ID="first_name" runat="server" Text="First Name"></asp:Label>
             :
@@ -38,13 +34,13 @@
             </asp:RadioButtonList>
             <br />
             <asp:Label ID="age" runat="server" Text="Age"></asp:Label>
-            :
-            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
-            <br />
-            <asp:RequiredFieldValidator ID="age_required_validation" runat="server" ControlToValidate="TextBox4" ErrorMessage="Please, enter your age."></asp:RequiredFieldValidator>
-&nbsp;<asp:RegularExpressionValidator ID="age_number_validation" runat="server" ControlToValidate="TextBox4" Display="Dynamic" ErrorMessage="Please, enter digit numbers" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
-            <asp:RangeValidator ID="age_range_validation" runat="server" ControlToValidate="TextBox4" Display="Dynamic" ErrorMessage="It can't be less than 1." MaximumValue="150" MinimumValue="1" Type="Integer"></asp:RangeValidator>
-            <br />
+            :&nbsp;
+            <asp:RadioButtonList ID="RadioButtonList2" runat="server" RepeatDirection="Horizontal">
+                <asp:ListItem Value="7">0 - 7</asp:ListItem>
+                <asp:ListItem Value="13">8 - 13</asp:ListItem>
+                <asp:ListItem Selected="True" Value="17">15 -17</asp:ListItem>
+                <asp:ListItem Value="18">18 ~</asp:ListItem>
+            </asp:RadioButtonList>
             <br />
             <asp:Label ID="email" runat="server" Text="Email"></asp:Label>
             :
@@ -52,6 +48,7 @@
             <br />
             <asp:RequiredFieldValidator ID="email_required_validation" runat="server" ControlToValidate="TextBox5" Display="Dynamic" ErrorMessage="Please, enter your email."></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="email_format_validation" runat="server" ControlToValidate="TextBox5" Display="Dynamic" ErrorMessage="It must be an email format." ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Validation duplicate email"></asp:CustomValidator>
             <br />
             <br />
             <asp:Label ID="password1" runat="server" Text="Password"></asp:Label>
@@ -73,26 +70,32 @@
             <asp:Label ID="genre" runat="server" Text="Favorite Genre"></asp:Label>
             :
             <asp:DropDownList ID="DropDownList1" runat="server">
-                <asp:ListItem Value="action">Action</asp:ListItem>
-                <asp:ListItem Value="blockbuster">Blockbuster</asp:ListItem>
-                <asp:ListItem Value="drama">Drama</asp:ListItem>
-                <asp:ListItem Value="romance">Romance</asp:ListItem>
-                <asp:ListItem Value="comedy">Comedy</asp:ListItem>
-                <asp:ListItem></asp:ListItem>
             </asp:DropDownList>
+            <br />
+            <br />
+            <asp:Label ID="Label10" runat="server" Text="Favorite Director:"></asp:Label>
+            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+            <br />
+            <asp:ListBox ID="ListBox1" runat="server" Height="186px" Width="222px"></asp:ListBox>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
             <asp:Label ID="actor" runat="server" Text="Favorite Actor / Actress"></asp:Label>
             :
-            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
             <br />
             <asp:RequiredFieldValidator ID="actor_required_validator" runat="server" ControlToValidate="TextBox8" Display="Dynamic" ErrorMessage="Please, enter your favorite actor or actress"></asp:RequiredFieldValidator>
+            <br />
+            <asp:ListBox ID="ListBox2" runat="server" Height="186px" Width="225px"></asp:ListBox>
             <br />
             <br />
             <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>
             <br />
             <br />
-            <asp:Button ID="Button1" runat="server" Text="Submit" />
+            <asp:Button ID="Button1" runat="server" Text="Submit" OnClick="Button1_Click" />
+            
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Back to Login" />
             
         </div>
     </form>
