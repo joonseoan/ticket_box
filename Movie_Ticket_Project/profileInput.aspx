@@ -1,12 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProfileInput.aspx.cs" Inherits="Movie_Ticket_Project.WebForm2" %>
-
+﻿<%@ Page maintainScrollPositionOnPostBack="true" Language="C#" AutoEventWireup="true" CodeBehind="ProfileInput.aspx.cs" Inherits="Movie_Ticket_Project.WebForm2" %>
+<!-- maintainScrollPositionOnPostBack="true" -->
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+
 </head>
+
 <body>
+    
+
     <form id="form1" runat="server">
         <div>
             
@@ -74,19 +78,19 @@
             <br />
             <br />
             <asp:Label ID="Label10" runat="server" Text="Favorite Director:"></asp:Label>
-            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
-            <br />
-            <asp:ListBox ID="ListBox1" runat="server" Height="186px" Width="222px"></asp:ListBox>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;<asp:Label ID="Label11" runat="server"></asp:Label>
+            &nbsp;<br />
+            
+            <asp:ListBox ID="ListBox1" runat="server" AutoPostBack="True" Height="217px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" Width="183px"></asp:ListBox>
+            
             <br />
             <br />
             <asp:Label ID="actor" runat="server" Text="Favorite Actor / Actress"></asp:Label>
-            :
-            <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+            :&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="Label12" runat="server"></asp:Label>
             <br />
-            <asp:RequiredFieldValidator ID="actor_required_validator" runat="server" ControlToValidate="TextBox8" Display="Dynamic" ErrorMessage="Please, enter your favorite actor or actress"></asp:RequiredFieldValidator>
+            <asp:ListBox ID="ListBox2" runat="server" AutoPostBack="True" Height="224px" OnSelectedIndexChanged="ListBox2_SelectedIndexChanged" Width="187px"></asp:ListBox>
             <br />
-            <asp:ListBox ID="ListBox2" runat="server" Height="186px" Width="225px"></asp:ListBox>
             <br />
             <br />
             <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>
@@ -99,5 +103,7 @@
             
         </div>
     </form>
+
+    
 </body>
 </html>

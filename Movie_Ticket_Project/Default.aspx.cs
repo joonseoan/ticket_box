@@ -107,7 +107,8 @@ namespace Movie_Ticket_Project
 
                 }
 
-            } else
+            }
+            else
             {
 
                 if (admin_email == email)
@@ -147,8 +148,8 @@ namespace Movie_Ticket_Project
 
             admin = true;
 
-
-
         }
+
     }
+
 }

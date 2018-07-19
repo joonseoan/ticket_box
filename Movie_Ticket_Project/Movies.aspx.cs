@@ -54,16 +54,16 @@ namespace Movie_Ticket_Project
                 command = new SqlCommand("INSERT INTO MOVIES VALUES (@title, @genre, @director, @cast1, @cast2, @cast3, @duration, @synopsis, @grade)", cnn);
 
                 // Assign book_name, author_name, publish_date to Insert query
-                command.Parameters.AddWithValue("@title", this.TextBox1.Text);
+                command.Parameters.AddWithValue("@title", this.TextBox1.Text.Trim());
                 command.Parameters.AddWithValue("@genre", this.DropDownList1.SelectedValue.ToString());
-                command.Parameters.AddWithValue("@director", this.TextBox2.Text);
-                command.Parameters.AddWithValue("@cast1", this.TextBox3.Text);
+                command.Parameters.AddWithValue("@director", this.TextBox2.Text.Trim());
+                command.Parameters.AddWithValue("@cast1", this.TextBox3.Text.Trim());
 
                 
                 if (!string.IsNullOrEmpty(this.TextBox4.Text))
                 {
 
-                    command.Parameters.AddWithValue("@cast2", this.TextBox4.Text);
+                    command.Parameters.AddWithValue("@cast2", this.TextBox4.Text.Trim());
 
                 } else
                 {
@@ -75,7 +75,7 @@ namespace Movie_Ticket_Project
                 if (!string.IsNullOrEmpty(this.TextBox5.Text))
                 {
 
-                    command.Parameters.AddWithValue("@cast3", this.TextBox5.Text);
+                    command.Parameters.AddWithValue("@cast3", this.TextBox5.Text.Trim());
 
                 }
                 else
@@ -85,8 +85,8 @@ namespace Movie_Ticket_Project
 
                 }
 
-                command.Parameters.AddWithValue("@duration", this.TextBox6.Text);
-                command.Parameters.AddWithValue("@synopsis", this.TextBox7.Text);
+                command.Parameters.AddWithValue("@duration", this.TextBox6.Text.Trim());
+                command.Parameters.AddWithValue("@synopsis", this.TextBox7.Text.Trim());
                 command.Parameters.AddWithValue("@grade", this.DropDownList2.SelectedValue.ToString());
 
                 command.ExecuteNonQuery();
@@ -109,18 +109,24 @@ namespace Movie_Ticket_Project
             catch (SqlException ex)
             {
 
-                Response.Write("Error in connection ! ");
+                this.Label1.Text = "Error in connection ! ";
                 
             }
 
             finally
             {
+
                 if (cnn.State == ConnectionState.Open)
                 {
+
                     cnn.Close();
+
                 }
+
             }
 
         }
+
     }
+
 }

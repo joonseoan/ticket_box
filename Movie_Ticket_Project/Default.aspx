@@ -39,7 +39,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:CheckBox ID="CheckBox1" runat="server" Text="I am an administrator" OnCheckedChanged="CheckBox1_CheckedChanged" />
         <p>
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="Label1" runat="server"></asp:Label>
         </p>
        
     </form>

@@ -256,13 +256,13 @@ namespace Movie_Ticket_Project {
         protected global::System.Web.UI.WebControls.Label Label10;
         
         /// <summary>
-        /// TextBox8 control.
+        /// Label11 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox8;
+        protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
         /// ListBox1 control.
@@ -283,22 +283,13 @@ namespace Movie_Ticket_Project {
         protected global::System.Web.UI.WebControls.Label actor;
         
         /// <summary>
-        /// TextBox9 control.
+        /// Label12 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox9;
-        
-        /// <summary>
-        /// actor_required_validator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator actor_required_validator;
+        protected global::System.Web.UI.WebControls.Label Label12;
         
         /// <summary>
         /// ListBox2 control.
