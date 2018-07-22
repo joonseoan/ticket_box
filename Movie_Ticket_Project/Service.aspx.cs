@@ -11,127 +11,157 @@ namespace Movie_Ticket_Project
 {
     public partial class WebForm4 : System.Web.UI.Page
     {
-        
-        protected void Page_Load(object sender, EventArgs e)
+
+        List<String> favMovies = new List<String>();
+
+        protected string splitTitle(string processed_title)
         {
 
-            string favGenre = Session["Genre"].ToString();
-            string favDirector = Session["Director"].ToString();
-            string favCast = Session["Cast"].ToString();
+            string[] basic_title = processed_title.Split('_');
 
-            List<string> favMovies = new List<string>();
+            return basic_title[0];
 
-            SqlConnection cnn;
-            SqlDataAdapter dap;
-            System.Data.DataSet ds;
-            string queryString;
+        }
 
-            string connectionString = "Data Source=LAPTOP-EO2QHHSQ\\SQLEXPRESS;Initial Catalog=TicketEasy;Integrated Security=SSPI;Persist Security Info=False";
-            cnn = new SqlConnection(connectionString);
-            queryString = "Select * from MOVIES";
+        protected void addTitles(string title)
+        {
 
-            try
-            {
-                cnn.Open();
+            
+            string title_database = title.Trim();
 
-                dap = new SqlDataAdapter(queryString, cnn);
-                ds = new DataSet();
-                dap.Fill(ds, "Movies");
+            favMovies.Add(title_database);
 
-                foreach (DataRow row in ds.Tables["Movies"].Rows)
-                {
-                    
-                    // when customer's favorite genre, cast, and directors
-                    //      are equal to data  --> Filter
-                    if (favGenre == row["genre"].ToString().Trim() &&
-                        (favCast == row["cast1"].ToString().Trim() ||
-                         favCast == row["cast2"].ToString().Trim() ||
-                         favCast == row["cast3"].ToString().Trim()) &&
-                        favDirector == row["director"].ToString().Trim())
-                    {
+            // Response.Write(title_database + ", ");
 
-                        favMovies.Add(row["title"].ToString() + "_cdg");
+            /* 
 
-                    }
-                    
-                    if ((favCast == row["cast1"].ToString().Trim() ||
-                         favCast == row["cast2"].ToString().Trim() ||
-                         favCast == row["cast3"].ToString().Trim()) &&
-                        favDirector == row["director"].ToString().Trim())
-                    {
+           if (favMovies.Count > 0)
+           {
 
-                        if(favMovies.Count != 0)
-                        {
-                            for (int i=0; i < favMovies.Count; i++)
-                            {
-                                /*
-                                string [] movie = favMovies[i].Split('_');
 
-                                if(movie[0] != row["title"].ToString())
-                                {
-                                    favMovies.Add(row["title"].ToString() + "_cd");
-                                }
-                                else
-                                {
 
-                                    favMovies.Add(favMovies[i] + "_cd");
-                                    
-                                }*/
-                            }
-                        }
-                        else
-                        {
+              foreach(String str in favMovies.ToArray())
+              //for(int i = 0;  favMovies.Count < i ; i++)
+               // foreach (String c in favMovies)
+               {
 
-                            favMovies.Add(row["title"].ToString() + "_cd");
+                   //Response.Write(str + ", ");
 
-                        }
-                        
+                   if (!favMovies.Contains(splitTitle(title_database)))
+                   {
+                       Response.Write("working?????????");
+                       favMovies.Add(title_database);
 
-                    }
+                   }
 
-                    if ((favCast == row["cast1"].ToString().Trim() ||
-                         favCast == row["cast2"].ToString().Trim() ||
-                         favCast == row["cast3"].ToString().Trim()) &&
-                        favGenre == row["genre"].ToString().Trim())
-                    {
+               }
 
-                        favMovies.Add(row["title"].ToString() + "_cg");
+           }
+           else
+           {
 
-                    }
-                    
-                    if (favDirector == row["director"].ToString().Trim() &&
-                        favGenre == row["genre"].ToString().Trim())
-                    {
+               favMovies.Add(title_database);
 
-                        favMovies.Add(row["title"].ToString() + "_dg");
+           }*/
 
-                    }
-                    
 
-                    if (favCast == row["cast1"].ToString().Trim() ||
+        }
+
+       protected void Page_Load(object sender, EventArgs e)
+       {
+
+           string favGenre = Session["Genre"].ToString();
+           string favDirector = Session["Director"].ToString();
+           string favCast = Session["Cast"].ToString();
+
+           SqlConnection cnn;
+           SqlDataAdapter dap;
+           System.Data.DataSet ds;
+           string queryString;
+
+           string connectionString = "Data Source=LAPTOP-EO2QHHSQ\\SQLEXPRESS;Initial Catalog=TicketEasy;Integrated Security=SSPI;Persist Security Info=False";
+           cnn = new SqlConnection(connectionString);
+           queryString = "Select * from MOVIES";
+
+           try
+           {
+               cnn.Open();
+
+               dap = new SqlDataAdapter(queryString, cnn);
+               ds = new DataSet();
+               dap.Fill(ds, "Movies");
+
+               foreach (DataRow row in ds.Tables["Movies"].Rows)
+               {
+
+                   // when customer's favorite genre, cast, and directors
+                   //      are equal to data  --> Filter
+                   if ((favCast == row["cast1"].ToString().Trim() ||
                         favCast == row["cast2"].ToString().Trim() ||
-                        favCast == row["cast3"].ToString().Trim())
-                    {
+                        favCast == row["cast3"].ToString().Trim()) &&
+                       favGenre == row["genre"].ToString().Trim() &&
+                       favDirector == row["director"].ToString().Trim())
+                   {
 
-                        favMovies.Add(row["title"].ToString() + "_c");
+                        addTitles(row["title"].ToString() + "_cdg");
+                        //  favMovies.Add(row["title"].ToString() + "_cdg");
 
-                    }
+                   }
 
-                    if (favDirector == row["Director"].ToString().Trim())
-                    {
+                   else if ((favCast == row["cast1"].ToString().Trim() ||
+                       favCast == row["cast2"].ToString().Trim() ||
+                       favCast == row["cast3"].ToString().Trim()) &&
+                       favDirector == row["director"].ToString().Trim())
+                   {
 
-                        favMovies.Add(row["title"].ToString() + "_d");
+                        addTitles(row["title"].ToString() + "_cd");
 
-                    }
+                   }
+
+
+                   else if ((favCast == row["cast1"].ToString().Trim() ||
+                   favCast == row["cast2"].ToString().Trim() ||
+                   favCast == row["cast3"].ToString().Trim()) &&
+                   favGenre == row["genre"].ToString().Trim())
+                   {
+
+                       addTitles(row["title"].ToString() + "_cg");
+
+
+                   }
+
+                   else if (favDirector == row["director"].ToString().Trim() &&
+                    favGenre == row["genre"].ToString().Trim())
+                   {
+
+                        addTitles(row["title"].ToString() + "_dg");
+
+                   }
+
+                   else if (favCast == row["cast1"].ToString().Trim() ||
+                    favCast == row["cast2"].ToString().Trim() ||
+                    favCast == row["cast3"].ToString().Trim())
+                   {
                     
-                    if (favGenre == row["genre"].ToString().Trim())
-                    {
+                        addTitles(row["title"].ToString() + "_c");
+                   
+                   }
 
-                        favMovies.Add(row["title"].ToString() + "_g");
+                   else if (favDirector == row["Director"].ToString().Trim())
+                   {
 
-                    }
+                        addTitles(row["title"].ToString() + "_d");
 
-                }
+                   }
+
+                   else if (favGenre == row["genre"].ToString().Trim())
+                   {
+
+                         addTitles(row["title"].ToString() + "_g");
+  
+                   }
+
+               } 
 
             }
             catch (SqlException ex)
@@ -152,14 +182,12 @@ namespace Movie_Ticket_Project
 
             }
 
-            foreach (string movie  in favMovies)
+            foreach (string movie in favMovies)
             {
 
                 Response.Write(movie + ", ");
 
             }
-
-            // Response.Write(favCast + favDirector + favGenre);
 
         }
 
