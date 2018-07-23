@@ -12,67 +12,141 @@ namespace Movie_Ticket_Project
     public partial class WebForm4 : System.Web.UI.Page
     {
 
-        List<String> favMovies = new List<String>();
+        List<String> recommended_title_images = new List<String>();
 
-        protected string splitTitle(string processed_title)
+        // Dictionary<string, string> recommended_title_images = new Dictionary<string, string>();
+
+
+        string favGenre;
+        string favDirector;
+        string favCast;
+        int custAge;
+
+
+        protected string[] splitTitle(string processed_title)
         {
 
             string[] basic_title = processed_title.Split('_');
 
-            return basic_title[0];
+            return basic_title;
 
         }
 
+        // title only
+        protected string deleteColone(string title)
+        {
+
+            int index = 0;
+            // string title_only;
+
+            foreach (char c in title)
+            {
+                if(c == ':')
+                {
+                    index = title.IndexOf(':');
+                }
+
+            }
+
+            string title_only = index != 0 ? title.Substring(0, index) : title;
+
+            return title_only;
+
+        }
+
+        // image title
+        protected string getImageName(string title)
+        {
+
+            string no_colone = deleteColone(title);  
+           
+            string image_title = no_colone.Replace(" ", "_");
+
+            return image_title;
+
+        }
+
+        protected string getBackToPureName(string image_name)
+        {
+            
+            string pureTileName = image_name.Replace("_", " ");
+
+            return pureTileName;
+
+        } 
+
+        protected bool validateRating(string rating)
+        {
+            //Response.Write(custAge + ", ");
+            // Response.Write(rating + ", ");
+            
+
+            bool validation = true;
+
+            string trimRating = rating.Trim();
+            
+            if(custAge == 17)
+            {
+                if(trimRating == "R" || trimRating == "18A" || trimRating == "A")
+                {
+
+                    validation = false;
+
+                }
+
+            }
+            else if(custAge == 13)
+            {
+
+                if (trimRating == "R" || trimRating == "18A" || trimRating == "A" || trimRating == "14A" )
+                {
+
+                    validation = false;
+
+                }
+
+            }
+            else if (custAge == 7)
+            {
+
+                if (trimRating == "R" || trimRating == "18A" || trimRating == "A" || trimRating == "14A" || trimRating == "PG")
+                {
+
+                    validation = false;
+
+                }
+
+            }
+
+            Response.Write(rating + ": " + validation + ",       ");
+
+            return validation;
+        }
+
+        // xxxxxx_cdg
         protected void addTitles(string title)
         {
 
-            
             string title_database = title.Trim();
 
-            favMovies.Add(title_database);
+            // xxxx and cdg
+            string [] title_name = splitTitle(title_database);
 
-            // Response.Write(title_database + ", ");
+            string image_title = getImageName(title_name[0]);
 
-            /* 
-
-           if (favMovies.Count > 0)
-           {
-
-
-
-              foreach(String str in favMovies.ToArray())
-              //for(int i = 0;  favMovies.Count < i ; i++)
-               // foreach (String c in favMovies)
-               {
-
-                   //Response.Write(str + ", ");
-
-                   if (!favMovies.Contains(splitTitle(title_database)))
-                   {
-                       Response.Write("working?????????");
-                       favMovies.Add(title_database);
-
-                   }
-
-               }
-
-           }
-           else
-           {
-
-               favMovies.Add(title_database);
-
-           }*/
-
+            // recommended_title_images.Add(image_title, title_name[1]);
+            recommended_title_images.Add(image_title);
 
         }
 
        protected void Page_Load(object sender, EventArgs e)
        {
 
-           string favGenre = Session["Genre"].ToString();
-           string favDirector = Session["Director"].ToString();
-           string favCast = Session["Cast"].ToString();
+           favGenre = Session["Genre"].ToString();
+           favDirector = Session["Director"].ToString();
+           favCast = Session["Cast"].ToString();
+           custAge = Convert.ToInt32(Session["Age"]);
+
 
            SqlConnection cnn;
            SqlDataAdapter dap;
@@ -102,11 +176,23 @@ namespace Movie_Ticket_Project
                        favGenre == row["genre"].ToString().Trim() &&
                        favDirector == row["director"].ToString().Trim())
                    {
+                        
+                        if(custAge < 18)
+                        {
+                            if(validateRating(row["grade"].ToString())) {
 
-                        addTitles(row["title"].ToString() + "_cdg");
-                        //  favMovies.Add(row["title"].ToString() + "_cdg");
+                                addTitles(row["title"].ToString() + "_cdg");
 
-                   }
+                            }
+                        }
+                        else
+                        {
+
+                            addTitles(row["title"].ToString() + "_cdg");
+
+                        }
+
+                    }
 
                    else if ((favCast == row["cast1"].ToString().Trim() ||
                        favCast == row["cast2"].ToString().Trim() ||
@@ -114,10 +200,23 @@ namespace Movie_Ticket_Project
                        favDirector == row["director"].ToString().Trim())
                    {
 
-                        addTitles(row["title"].ToString() + "_cd");
+                        if (custAge < 18)
+                        {
+                            if (validateRating(row["grade"].ToString()))
+                            {
 
-                   }
+                                addTitles(row["title"].ToString() + "_cd");
 
+                            }
+                        }
+                        else
+                        {
+
+                            addTitles(row["title"].ToString() + "_cd");
+
+                        }
+
+                    }
 
                    else if ((favCast == row["cast1"].ToString().Trim() ||
                    favCast == row["cast2"].ToString().Trim() ||
@@ -125,8 +224,21 @@ namespace Movie_Ticket_Project
                    favGenre == row["genre"].ToString().Trim())
                    {
 
-                       addTitles(row["title"].ToString() + "_cg");
+                        if (custAge < 18)
+                        {
+                            if (validateRating(row["grade"].ToString()))
+                            {
 
+                                addTitles(row["title"].ToString() + "_cg");
+
+                            }
+                        }
+                        else
+                        {
+
+                            addTitles(row["title"].ToString() + "_cg");
+
+                        }
 
                    }
 
@@ -134,32 +246,92 @@ namespace Movie_Ticket_Project
                     favGenre == row["genre"].ToString().Trim())
                    {
 
-                        addTitles(row["title"].ToString() + "_dg");
+                        if (custAge < 18)
+                        {
+                            if (validateRating(row["grade"].ToString()))
+                            {
 
-                   }
+                                addTitles(row["title"].ToString() + "_dg");
+
+                            }
+                            
+                        }
+                        else
+                        {
+
+                            addTitles(row["title"].ToString() + "_dg");
+
+                        }
+
+                    }
 
                    else if (favCast == row["cast1"].ToString().Trim() ||
                     favCast == row["cast2"].ToString().Trim() ||
                     favCast == row["cast3"].ToString().Trim())
                    {
-                    
-                        addTitles(row["title"].ToString() + "_c");
-                   
-                   }
+
+                        if (custAge < 18)
+                        {
+                            if (validateRating(row["grade"].ToString()))
+                            {
+
+                                addTitles(row["title"].ToString() + "_c");
+
+                            }   
+
+                        }
+                        else
+                        {
+
+                            addTitles(row["title"].ToString() + "_c");
+
+                        }
+
+                    }
 
                    else if (favDirector == row["Director"].ToString().Trim())
                    {
 
-                        addTitles(row["title"].ToString() + "_d");
+                        if (custAge < 18)
+                        {
+                            if (validateRating(row["grade"].ToString()))
+                            {
 
-                   }
+                                addTitles(row["title"].ToString() + "_d");
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            addTitles(row["title"].ToString() + "_d");
+
+                        }
+
+                    }
 
                    else if (favGenre == row["genre"].ToString().Trim())
                    {
 
-                         addTitles(row["title"].ToString() + "_g");
-  
-                   }
+                        if (custAge < 18)
+                        {
+                            if (validateRating(row["grade"].ToString()))
+                            {
+
+                                addTitles(row["title"].ToString() + "_g");
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            addTitles(row["title"].ToString() + "_g");
+
+                        }
+
+                    }
 
                } 
 
@@ -181,16 +353,84 @@ namespace Movie_Ticket_Project
                 }
 
             }
-
-            foreach (string movie in favMovies)
+            
+            /*
+            foreach(KeyValuePair <string, string> movie in recommended_title_images)
             {
+               // ImageButton  = new ImageButton;
+                //Response.Write(recommended_title_images[movie] + ", ");
+                this.ImageButton1.ImageUrl = $"/images/{movie.Key}.PNG";
 
-                Response.Write(movie + ", ");
+                if(movie.Value == "cdg")
+                {
+
+                    this.Label1.Text = $"Perfect Movie that is identifed with your favorite cast {favCast}" +
+                        $", director, {favDirector}, genre, {favGenre.ToLower()}";
+
+                }
+                else if (movie.Value == "cd")
+                {
+
+                    this.Label1.Text = $"Picked for you because you love {favCast} " +
+                        $"and  director, {favDirector}";
+
+                }
+                else if (movie.Value == "cg")
+                {
+
+                    this.Label1.Text = $"Picked for you because you love {favCast} " +
+                        $"and  this genre, {favGenre.ToLower()}";
+
+                }
+                else if (movie.Value == "dg")
+                {
+
+                    this.Label1.Text = $"Picked for you because you like a director{favDirector} " +
+                        $"and  this genre, {favGenre.ToLower()}";
+
+                }
+                else if (movie.Value == "c")
+                {
+
+                    this.Label1.Text = $"You love {favCast}, right?";
+
+                }
+
+                else if (movie.Value == "d")
+                {
+
+                    this.Label1.Text = $"You expect {favDirector}'s movie, right?";
+
+                }
+                else
+                {
+
+                    this.Label1.Text = $"You like this {favGenre.ToLower()}  movie, right?";
+
+                }
+
+            }*/
+
+
+            if(recommended_title_images.Count != 0)
+            {
+                this.ImageButton1.ImageUrl = $"/images/{recommended_title_images[0]}.PNG";
+                this.ImageButton2.ImageUrl = $"/images/{recommended_title_images[1]}.PNG";
+                this.ImageButton3.ImageUrl = $"/images/{recommended_title_images[2]}.PNG";
+                this.ImageButton4.ImageUrl = $"/images/{recommended_title_images[3]}.PNG";
+                this.ImageButton5.ImageUrl = $"/images/{recommended_title_images[4]}.PNG";
+                //this.ImageButton6.ImageUrl = $"/images/{recommended_title_images[5]}.PNG";
 
             }
-
+            else
+            {
+                Response.Write("No movies");
+            }
+            
+            
         }
 
     }
 
+    
 }

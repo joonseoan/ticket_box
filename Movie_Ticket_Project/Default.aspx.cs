@@ -11,6 +11,7 @@ namespace Movie_Ticket_Project
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+
         Boolean admin = false;
         string admin_email;
         string admin_pw;
@@ -55,6 +56,7 @@ namespace Movie_Ticket_Project
 
                     foreach (DataRow row in ds.Tables["Customer"].Rows)
                     {
+
                         if (email == row["email"].ToString())
                         {
 
@@ -66,6 +68,7 @@ namespace Movie_Ticket_Project
                                 Session["Genre"] = row["genre"];
                                 Session["Director"] = row["director"];
                                 Session["Cast"] = row["cast"];
+                                Session["Age"] = row["age"];
 
                                 Response.Redirect("Service.aspx");
 

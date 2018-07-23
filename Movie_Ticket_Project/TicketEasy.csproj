@@ -69,6 +69,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="images\Avengers.PNG" />
+    <Content Include="images\Chronicle.PNG" />
+    <Content Include="images\Dark_Shadows.PNG" />
+    <Content Include="images\Dear_John.PNG" />
+    <Content Include="images\Disobedience.PNG" />
+    <Content Include="images\Dumbo.PNG" />
+    <Content Include="images\Euphoria.PNG" />
+    <Content Include="images\Fantastic_Beasts.PNG" />
+    <Content Include="images\Fantastic_Four.PNG" />
+    <Content Include="images\Frozen.PNG" />
+    <Content Include="images\How_to_Train_Your_Dragon.PNG" />
+    <Content Include="images\Iron_Man.PNG" />
+    <Content Include="images\Jurassic_World.PNG" />
+    <Content Include="images\Kung_Fu_Panda_2.PNG" />
+    <Content Include="images\Sherlock_Holmes.PNG" />
+    <Content Include="images\Shrek.PNG" />
+    <Content Include="images\The_Notebook.PNG" />
+    <Content Include="images\The_Other_Woman.PNG" />
+    <Content Include="images\The_Vow.PNG" />
+    <Content Include="images\Transformers_2.PNG" />
     <Content Include="Web.config" />
     <Content Include="Default.aspx" />
     <Content Include="ProfileInput.aspx" />
@@ -118,6 +138,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
