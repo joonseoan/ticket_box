@@ -12,10 +12,11 @@ namespace Movie_Ticket_Project
     public partial class WebForm4 : System.Web.UI.Page
     {
 
-        List<String> recommended_title_images = new List<String>();
-
         // Dictionary<string, string> recommended_title_images = new Dictionary<string, string>();
 
+        List<ImageButton> img = new List<ImageButton>();
+
+        List<String> recommended_title_images = new List<String>();
 
         string favGenre;
         string favDirector;
@@ -77,10 +78,9 @@ namespace Movie_Ticket_Project
 
         protected bool validateRating(string rating)
         {
+
             //Response.Write(custAge + ", ");
             // Response.Write(rating + ", ");
-            
-
             bool validation = true;
 
             string trimRating = rating.Trim();
@@ -121,8 +121,8 @@ namespace Movie_Ticket_Project
             Response.Write(rating + ": " + validation + ",       ");
 
             return validation;
-        }
 
+        }
         // xxxxxx_cdg
         protected void addTitles(string title)
         {
@@ -134,7 +134,9 @@ namespace Movie_Ticket_Project
 
             string image_title = getImageName(title_name[0]);
 
-            // recommended_title_images.Add(image_title, title_name[1]);
+            img.Add(new ImageButton());
+            
+            //recommended_title_images.Add(image_title, title_name[1]);
             recommended_title_images.Add(image_title);
 
         }
@@ -217,7 +219,6 @@ namespace Movie_Ticket_Project
                         }
 
                     }
-
                    else if ((favCast == row["cast1"].ToString().Trim() ||
                    favCast == row["cast2"].ToString().Trim() ||
                    favCast == row["cast3"].ToString().Trim()) &&
@@ -268,7 +269,7 @@ namespace Movie_Ticket_Project
                    else if (favCast == row["cast1"].ToString().Trim() ||
                     favCast == row["cast2"].ToString().Trim() ||
                     favCast == row["cast3"].ToString().Trim())
-                   {
+                    {
 
                         if (custAge < 18)
                         {
@@ -287,8 +288,7 @@ namespace Movie_Ticket_Project
 
                         }
 
-                    }
-
+                   }
                    else if (favDirector == row["Director"].ToString().Trim())
                    {
 
@@ -353,11 +353,59 @@ namespace Movie_Ticket_Project
                 }
 
             }
-            
+
+            //Button btn = new Button();
+
+            if (img.Count != 0)
+            {
+                int count = 0;
+                foreach(ImageButton movie in img)
+                {
+
+                    movie.ID = movie.ToString() + count.ToString(); //recommended_title_images[count];
+                    movie.ImageUrl = $"/images/{recommended_title_images[count]}.PNG";
+                    //movie.NavigateUrl = "Description.aspx";
+                    movie.Visible = true;
+                    movie.Click += new ImageClickEventHandler(ImageButton1_Click);
+                    movie.Width = 200;
+                    movie.Height = 300;
+                    // movie.Text = recommended_title_images[count];
+                    //movie.Target = "targetTest";
+                    this.Controls.Add(movie);
+
+                    //img1.ID = "ImageButton1";
+                    //img1.ImageUrl = $"/images/{recommended_title_images[2]}.PNG";
+                    //img1.Click += new ImageClickEventHandler(ImageButton1_Click);
+                    //Panel1.Controls.Add(img1);
+
+
+                    // btn.Visible = true;
+
+                    // this.Controls.Add(btn);
+
+
+
+                    count++;
+
+                }
+
+
+
+            }
+            else
+            {
+
+                Response.Write("Sorry we do not have your movies");
+
+            }
+
+            //this.DynamicHyperLink1.DataField ="dd"
+
+
             /*
             foreach(KeyValuePair <string, string> movie in recommended_title_images)
             {
-               // ImageButton  = new ImageButton;
+                // ImageButton  = new ImageButton;
                 //Response.Write(recommended_title_images[movie] + ", ");
                 this.ImageButton1.ImageUrl = $"/images/{movie.Key}.PNG";
 
@@ -409,9 +457,11 @@ namespace Movie_Ticket_Project
 
                 }
 
-            }*/
+            }
 
+            */
 
+            /*
             if(recommended_title_images.Count != 0)
             {
                 this.ImageButton1.ImageUrl = $"/images/{recommended_title_images[0]}.PNG";
@@ -426,11 +476,74 @@ namespace Movie_Ticket_Project
             {
                 Response.Write("No movies");
             }
-            
-            
+            */
+
+
+            // Image Image2 = new Image();
+            // Image2.AlternateText = "test";
+            // Image2.Visible = true;
+            // Image2.ImageUrl = $"/images/{recommended_title_images[4]}.PNG";
+            // this.Controls.Add(Image2);
+
+            /*
+             
+             Image myImg = new Image();
+myImg.ImageUrl = "path_of_the_image.jpg";
+myImg.Visible = true;
+Panel1.Controls.Add(myImg);   //You can attach the image to any control on your page
+Or similarly:
+
+this.Controls.Add(myImg);     //Incase you wanted the image on your page controls
+Label1.Controls.Add(myImg);   //Incase you wanted the image to appear in a certain label
+             
+             */
+
+
+            //ImageMapEventHandler ie = new ImageMapEventHandler().; 
+
+
+            // = test_imageMap;
+
+            //  ImageButton ImageButton = new ImageButton();
+            //ImageButton.Visible = true;
+            //ImageButton.ImageUrl = $"/images/{recommended_title_images[3]}.PNG";
+
+            // ImageMap.HotSpotMode = HotSpotMode.PostBack;
+            // ImageButton.Click = new ImageEventHandler(test_imageMap);
+            // this.Controls.Add(ImageButton);
+
+
+            // this.HyperLink1.ImageUrl = $"/images/{recommended_title_images[3]}.PNG"; 
+            // this.HyperLink1.wi
+            //   $"/images/{recommended_title_images[count]}.PNG"
+
+            //this.Button1.Style["background-image"] = $"url(/images/{recommended_title_images[2]}.PNG)";
+
+            // Button btn = new Button();
+            // btn.Visible = true;
+            //this.Controls.Add(btn);
+            // testSpace.Style["background-image"] = "url(images/foo.png)";
+
+
+            //ImageButton img1 = new ImageButton();
+            //img1.ID = "ImageButton1";
+            //img1.ImageUrl = $"/images/{recommended_title_images[2]}.PNG";
+            //img1.Click += new ImageClickEventHandler(ImageButton1_Click);
+            //Panel1.Controls.Add(img1);
+        }
+        //background-image:url('Image/1.png')
+        //public void targetTest(string imageName)
+        //{
+          //  Response.("ddd");
+        //}
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Write(e.ToString());
+            Response.Write(sender.ToString());
+                // ClientScript.RegisterStartupScript(this.GetType(), "ImageButton_Alert", "alert('ImageButton clicked!');", true);
         }
 
     }
 
-    
 }

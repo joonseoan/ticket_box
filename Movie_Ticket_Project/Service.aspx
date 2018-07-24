@@ -12,34 +12,28 @@
             
             This is service page
             
+            <br />
+            
+            <br />
+            <br />
+            
         </div>
         <p>
             &nbsp;</p>
-        <p>
-            &nbsp;</p>
+        <asp:Button ID="Button1" runat="server" Text="Button" />
+        
+        <asp:LinkButton ID="LinkButton1" runat="server">LinkButton</asp:LinkButton>
+        <asp:Button ID="Button2" runat="server" Text="Button" />
+        <asp:CheckBox ID="CheckBox1" runat="server" />
+        <asp:GridView ID="GridView1" runat="server" Height="223px" Width="428px">
+        </asp:GridView>
+        <asp:Image ID="Image1" runat="server" />
+        <asp:FormView ID="FormView1" runat="server">
+        </asp:FormView>
 
-        <!-- ImageUrl="~/images/Dear_John.PNG" -->
+        <asp:Panel ID="Panel1" runat="server">
+        </asp:Panel>
 
-
-        <asp:ImageButton ID="ImageButton1" runat="server" ForeColor="#CC0000" />
-&nbsp;<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-&nbsp;<asp:ImageButton ID="ImageButton2" runat="server" />
-        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-        <asp:ImageButton ID="ImageButton3" runat="server" />
-        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-        <asp:ImageButton ID="ImageButton4" runat="server" />
-        <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
-        <asp:ImageButton ID="ImageButton5" runat="server" />
-        <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
-        <asp:ImageButton ID="ImageButton6" runat="server" />
-        <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
-        <asp:ImageButton ID="ImageButton7" runat="server" />
-        <asp:Label ID="Label7" runat="server" Text="Label"></asp:Label>
-        <asp:ImageButton ID="ImageButton8" runat="server" />
-        <asp:Label ID="Label8" runat="server" Text="Label"></asp:Label>
-        <asp:ImageButton ID="ImageButton9" runat="server" />
-        <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>
-           
     </form>
 </body>
 </html>
