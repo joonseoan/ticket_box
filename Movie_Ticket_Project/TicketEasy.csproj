@@ -88,7 +88,7 @@
     <Content Include="images\The_Notebook.PNG" />
     <Content Include="images\The_Other_Woman.PNG" />
     <Content Include="images\The_Vow.PNG" />
-    <Content Include="images\Transformers_2.PNG" />
+    <Content Include="images\Transformers.PNG" />
     <Content Include="Web.config" />
     <Content Include="Default.aspx" />
     <Content Include="ProfileInput.aspx" />

@@ -12,28 +12,17 @@
             
             This is service page
             
-            <br />
-            
-            <br />
-            <br />
-            
-        </div>
-        <p>
-            &nbsp;</p>
-        <asp:Button ID="Button1" runat="server" Text="Button" />
-        
-        <asp:LinkButton ID="LinkButton1" runat="server">LinkButton</asp:LinkButton>
-        <asp:Button ID="Button2" runat="server" Text="Button" />
-        <asp:CheckBox ID="CheckBox1" runat="server" />
-        <asp:GridView ID="GridView1" runat="server" Height="223px" Width="428px">
-        </asp:GridView>
-        <asp:Image ID="Image1" runat="server" />
-        <asp:FormView ID="FormView1" runat="server">
-        </asp:FormView>
+            <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+             <asp:Table ID="Table1" runat="server" BackColor="Black" ForeColor="White" HorizontalAlign="Center"></asp:Table>
 
-        <asp:Panel ID="Panel1" runat="server">
-        </asp:Panel>
+        </div>
+        &nbsp;
+        
 
     </form>
+
+   
+            
+   
 </body>
 </html>

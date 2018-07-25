@@ -16,14 +16,19 @@ namespace Movie_Ticket_Project
 
         List<ImageButton> img = new List<ImageButton>();
 
-        List<String> recommended_title_images = new List<String>();
+        List<string []> movie_elements = new List<string []>();
+
+        string[] movie_contents = new string[11];
+
+        Table recommenation_table = new Table();
 
         string favGenre;
         string favDirector;
         string favCast;
         int custAge;
 
-
+        
+        /*
         protected string[] splitTitle(string processed_title)
         {
 
@@ -32,11 +37,11 @@ namespace Movie_Ticket_Project
             return basic_title;
 
         }
+        */
 
         // title only
         protected string deleteColone(string title)
         {
-
             int index = 0;
             // string title_only;
 
@@ -118,26 +123,20 @@ namespace Movie_Ticket_Project
 
             }
 
-            Response.Write(rating + ": " + validation + ",       ");
+            // Response.Write(rating + ": " + validation + ",       ");
 
             return validation;
 
         }
+
         // xxxxxx_cdg
-        protected void addTitles(string title)
+        protected void addTitles(string [] movie)
         {
 
-            string title_database = title.Trim();
-
-            // xxxx and cdg
-            string [] title_name = splitTitle(title_database);
-
-            string image_title = getImageName(title_name[0]);
-
             img.Add(new ImageButton());
-            
-            //recommended_title_images.Add(image_title, title_name[1]);
-            recommended_title_images.Add(image_title);
+
+            //{ movie[1], "dd" }
+            movie_elements.Add(new string [] {getImageName(movie[1]) ,movie[1], movie[2], movie[3], movie[4], movie[5], movie[6], movie[7], movie[8], movie[9], movie[10] });
 
         }
 
@@ -149,7 +148,6 @@ namespace Movie_Ticket_Project
            favCast = Session["Cast"].ToString();
            custAge = Convert.ToInt32(Session["Age"]);
 
-
            SqlConnection cnn;
            SqlDataAdapter dap;
            System.Data.DataSet ds;
@@ -158,7 +156,7 @@ namespace Movie_Ticket_Project
            string connectionString = "Data Source=LAPTOP-EO2QHHSQ\\SQLEXPRESS;Initial Catalog=TicketEasy;Integrated Security=SSPI;Persist Security Info=False";
            cnn = new SqlConnection(connectionString);
            queryString = "Select * from MOVIES";
-
+           
            try
            {
                cnn.Open();
@@ -170,134 +168,30 @@ namespace Movie_Ticket_Project
                foreach (DataRow row in ds.Tables["Movies"].Rows)
                {
 
-                   // when customer's favorite genre, cast, and directors
-                   //      are equal to data  --> Filter
-                   if ((favCast == row["cast1"].ToString().Trim() ||
-                        favCast == row["cast2"].ToString().Trim() ||
-                        favCast == row["cast3"].ToString().Trim()) &&
-                       favGenre == row["genre"].ToString().Trim() &&
-                       favDirector == row["director"].ToString().Trim())
-                   {
-                        
-                        if(custAge < 18)
-                        {
-                            if(validateRating(row["grade"].ToString())) {
+                    movie_contents[0] = "image";
+                    movie_contents[1] = row["title"].ToString().Trim();
+                    movie_contents[2] = row["genre"].ToString().Trim();
+                    movie_contents[3] = row["director"].ToString().Trim();
+                    movie_contents[4] = row["cast1"].ToString().Trim();
+                    movie_contents[5] = row["cast2"].ToString().Trim();
+                    movie_contents[6] = row["cast3"].ToString().Trim();
+                    movie_contents[7] = row["duration"].ToString().Trim();
+                    movie_contents[8] = row["synopsis"].ToString().Trim();
+                    movie_contents[9] = row["grade"].ToString().Trim();
+                    movie_contents[10] = "preference";
 
-                                addTitles(row["title"].ToString() + "_cdg");
-
-                            }
-                        }
-                        else
-                        {
-
-                            addTitles(row["title"].ToString() + "_cdg");
-
-                        }
-
-                    }
-
-                   else if ((favCast == row["cast1"].ToString().Trim() ||
-                       favCast == row["cast2"].ToString().Trim() ||
-                       favCast == row["cast3"].ToString().Trim()) &&
-                       favDirector == row["director"].ToString().Trim())
-                   {
-
-                        if (custAge < 18)
-                        {
-                            if (validateRating(row["grade"].ToString()))
-                            {
-
-                                addTitles(row["title"].ToString() + "_cd");
-
-                            }
-                        }
-                        else
-                        {
-
-                            addTitles(row["title"].ToString() + "_cd");
-
-                        }
-
-                    }
-                   else if ((favCast == row["cast1"].ToString().Trim() ||
-                   favCast == row["cast2"].ToString().Trim() ||
-                   favCast == row["cast3"].ToString().Trim()) &&
-                   favGenre == row["genre"].ToString().Trim())
-                   {
-
-                        if (custAge < 18)
-                        {
-                            if (validateRating(row["grade"].ToString()))
-                            {
-
-                                addTitles(row["title"].ToString() + "_cg");
-
-                            }
-                        }
-                        else
-                        {
-
-                            addTitles(row["title"].ToString() + "_cg");
-
-                        }
-
-                   }
-
-                   else if (favDirector == row["director"].ToString().Trim() &&
-                    favGenre == row["genre"].ToString().Trim())
-                   {
-
-                        if (custAge < 18)
-                        {
-                            if (validateRating(row["grade"].ToString()))
-                            {
-
-                                addTitles(row["title"].ToString() + "_dg");
-
-                            }
-                            
-                        }
-                        else
-                        {
-
-                            addTitles(row["title"].ToString() + "_dg");
-
-                        }
-
-                    }
-
-                   else if (favCast == row["cast1"].ToString().Trim() ||
-                    favCast == row["cast2"].ToString().Trim() ||
-                    favCast == row["cast3"].ToString().Trim())
+                    if ((favCast == movie_contents[4] || favCast == movie_contents[5] || favCast == movie_contents[6]) &&
+                        favDirector == movie_contents[3] && favGenre == movie_contents[2])
                     {
 
                         if (custAge < 18)
                         {
-                            if (validateRating(row["grade"].ToString()))
+
+                            if (validateRating(movie_contents[9]))
                             {
 
-                                addTitles(row["title"].ToString() + "_c");
-
-                            }   
-
-                        }
-                        else
-                        {
-
-                            addTitles(row["title"].ToString() + "_c");
-
-                        }
-
-                   }
-                   else if (favDirector == row["Director"].ToString().Trim())
-                   {
-
-                        if (custAge < 18)
-                        {
-                            if (validateRating(row["grade"].ToString()))
-                            {
-
-                                addTitles(row["title"].ToString() + "_d");
+                                movie_contents[10] = "cdg";
+                                addTitles(movie_contents);
 
                             }
 
@@ -305,21 +199,27 @@ namespace Movie_Ticket_Project
                         else
                         {
 
-                            addTitles(row["title"].ToString() + "_d");
+                            movie_contents[10] = "cdg";
+                            addTitles(movie_contents);
 
                         }
 
                     }
 
-                   else if (favGenre == row["genre"].ToString().Trim())
-                   {
+                    else if ((favCast == movie_contents[4] || favCast == movie_contents[5] || favCast == movie_contents[6]) &&
+                        favDirector == movie_contents[3])
+                    {
 
                         if (custAge < 18)
                         {
-                            if (validateRating(row["grade"].ToString()))
+
+                            if (validateRating(movie_contents[9]))
                             {
 
-                                addTitles(row["title"].ToString() + "_g");
+                                //addTitles(row["title"].ToString() + "_cd");
+                                movie_contents[10] = "cd";
+                                addTitles(movie_contents);
+
 
                             }
 
@@ -327,7 +227,127 @@ namespace Movie_Ticket_Project
                         else
                         {
 
-                            addTitles(row["title"].ToString() + "_g");
+                            movie_contents[10] = "cd";
+                            addTitles(movie_contents);
+
+                        }
+
+                    }
+                    else if ((favCast == movie_contents[4] || favCast == movie_contents[5] || favCast == movie_contents[6]) &&
+                             favGenre == movie_contents[2])
+                    {
+
+                        if (custAge < 18)
+                        {
+
+                            if (validateRating(movie_contents[9]))
+                            {
+
+                                movie_contents[10] = "cg";
+                                addTitles(movie_contents);
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            movie_contents[10] = "cg";
+                            addTitles(movie_contents);
+
+                        }
+
+                    }
+                    else if (favDirector == movie_contents[3] && favGenre == movie_contents[2])
+                    {
+
+                        if (custAge < 18)
+                        {
+                            if (validateRating(movie_contents[9]))
+                            {
+
+                                movie_contents[10] = "dg";
+                                addTitles(movie_contents);
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            movie_contents[10] = "dg";
+                            addTitles(movie_contents);
+
+                        }
+
+                    }
+
+                    else if (favCast == movie_contents[4] || favCast == movie_contents[5] || favCast == movie_contents[6])
+                    {
+
+                        if (custAge < 18)
+                        {
+                            if (validateRating(movie_contents[9]))
+                            {
+
+                                movie_contents[10] = "c";
+                                addTitles(movie_contents);
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            movie_contents[10] = "c";
+                            addTitles(movie_contents);
+
+                        }
+
+                    }
+                    else if (favDirector == movie_contents[3])
+                    {
+
+                        if (custAge < 18)
+                        {
+                            if (validateRating(movie_contents[9]))
+                            {
+
+                                movie_contents[10] = "d";
+                                addTitles(movie_contents);
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            movie_contents[10] = "d";
+                            addTitles(movie_contents);
+
+                        }
+
+                    }
+
+                    else if (favGenre == movie_contents[2])
+                    {
+
+                        if (custAge < 18)
+                        {
+                            if (validateRating(movie_contents[9]))
+                            {
+
+                                movie_contents[10] = "g";
+                                addTitles(movie_contents);
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            movie_contents[10] = "g";
+                            addTitles(movie_contents);
 
                         }
 
@@ -354,42 +374,113 @@ namespace Movie_Ticket_Project
 
             }
 
-            //Button btn = new Button();
 
             if (img.Count != 0)
             {
+                
                 int count = 0;
-                foreach(ImageButton movie in img)
+
+                TableRow rows1 = new TableRow();
+                TableRow rows2 = new TableRow();
+
+                foreach (ImageButton movie in img)
                 {
 
-                    movie.ID = movie.ToString() + count.ToString(); //recommended_title_images[count];
-                    movie.ImageUrl = $"/images/{recommended_title_images[count]}.PNG";
-                    //movie.NavigateUrl = "Description.aspx";
+                    movie.ID = movie_elements[count][1];
+                    movie.ImageUrl = $"/images/{getImageName(movie_elements[count][0])}.PNG";
+                    
                     movie.Visible = true;
                     movie.Click += new ImageClickEventHandler(ImageButton1_Click);
+                    movie.Attributes["image"] = movie_elements[count][0];
+                    movie.Attributes["title"] = movie_elements[count][1];
+                    movie.Attributes["genre"] = movie_elements[count][2];
+                    movie.Attributes["director"] = movie_elements[count][3];
+                    movie.Attributes["cast1"] = movie_elements[count][4];
+                    movie.Attributes["cast2"] = movie_elements[count][5];
+                    movie.Attributes["cast3"] = movie_elements[count][6];
+                    movie.Attributes["duration"] = movie_elements[count][7];
+                    movie.Attributes["synopsis"] = movie_elements[count][8];
+                    movie.Attributes["rating"] = movie_elements[count][9];
+                    movie.Attributes["preference"] = movie_elements[count][10];
+                    movie.AlternateText = movie_elements[count][0];
                     movie.Width = 200;
                     movie.Height = 300;
-                    // movie.Text = recommended_title_images[count];
-                    //movie.Target = "targetTest";
-                    this.Controls.Add(movie);
-
-                    //img1.ID = "ImageButton1";
-                    //img1.ImageUrl = $"/images/{recommended_title_images[2]}.PNG";
-                    //img1.Click += new ImageClickEventHandler(ImageButton1_Click);
-                    //Panel1.Controls.Add(img1);
+                    movie.BorderStyle = BorderStyle.Solid;
+                    movie.BorderColor = System.Drawing.Color.Red; // BorderStyle("", "") //AttributeCollection .Solid")    ("red");
 
 
-                    // btn.Visible = true;
 
-                    // this.Controls.Add(btn);
+                    if (count%4 == 0 )
+                    {
+                        rows1 = new TableRow();
+                        rows2 = new TableRow();
+                    }
 
+                    TableCell cell1 = new TableCell();
+                    TableCell cell2 = new TableCell();
+                    rows1.HorizontalAlign = HorizontalAlign.Center;
+                    rows2.HorizontalAlign = HorizontalAlign.Center;
 
+                   // cell1.Text = movie_elements[count][10];
+
+                    if (movie_elements[count][10] == "cdg")
+                    {
+
+                        cell1.Text = "100% perfect for you!";
+
+                    }
+                    else if (movie_elements[count][10] == "cd")
+                    {
+
+                        cell1.Text = $"Awesome {favCast} with {favDirector}"; 
+
+                    }
+                    else if (movie_elements[count][10] == "cg")
+                    {
+
+                        cell1.Text = $"{favCast} is the best in {favGenre.ToLower()} movie";
+
+                    }
+                    else if (movie_elements[count][10] == "dg")
+                    {
+
+                        cell1.Text = $"The best director {favDirector}, the great {favGenre.ToLower()}";
+
+                    }
+                    else if (movie_elements[count][10] == "c")
+                    {
+
+                        cell1.Text = $"You love {favCast}, right?";
+
+                    }
+
+                    else if (movie_elements[count][10] == "d")
+                    {
+
+                        cell1.Text = $"{favDirector} is adorable, right?";
+
+                    }
+                    else
+                    {
+
+                        cell1.Text = $"Your favorite {favGenre.ToLower()} movies!";
+
+                    }
+
+                    cell2.Controls.Add(movie);
+
+                    cell2.Width = 300;
+                    cell2.Height = 350;
+
+                    rows1.Cells.Add(cell1);
+                    rows2.Cells.Add(cell2);
+
+                    this.Table1.Rows.Add(rows1);
+                    this.Table1.Rows.Add(rows2);
 
                     count++;
 
                 }
-
-
 
             }
             else
@@ -399,151 +490,27 @@ namespace Movie_Ticket_Project
 
             }
 
-            //this.DynamicHyperLink1.DataField ="dd"
+       }
+        
+       protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+       {
 
+            Session["Image"] = ((ImageButton)sender).Attributes["image"];
+            Session["Title"] = ((ImageButton)sender).Attributes["title"];
+            Session["Genre"] = ((ImageButton)sender).Attributes["genre"];
+            Session["Director"] = ((ImageButton)sender).Attributes["director"];
+            Session["Cast1"] = ((ImageButton)sender).Attributes["cast1"];
+            Session["Cast2"] = ((ImageButton)sender).Attributes["cast2"];
+            Session["Cast3"] = ((ImageButton)sender).Attributes["cast3"];
+            Session["Duration"] = ((ImageButton)sender).Attributes["duration"];
+            Session["Synopsis"] = ((ImageButton)sender).Attributes["synopsis"];
+            Session["Rating"] = ((ImageButton)sender).Attributes["rating"];
+            Session["Preference"] = ((ImageButton)sender).Attributes["preference"];
 
-            /*
-            foreach(KeyValuePair <string, string> movie in recommended_title_images)
-            {
-                // ImageButton  = new ImageButton;
-                //Response.Write(recommended_title_images[movie] + ", ");
-                this.ImageButton1.ImageUrl = $"/images/{movie.Key}.PNG";
-
-                if(movie.Value == "cdg")
-                {
-
-                    this.Label1.Text = $"Perfect Movie that is identifed with your favorite cast {favCast}" +
-                        $", director, {favDirector}, genre, {favGenre.ToLower()}";
-
-                }
-                else if (movie.Value == "cd")
-                {
-
-                    this.Label1.Text = $"Picked for you because you love {favCast} " +
-                        $"and  director, {favDirector}";
-
-                }
-                else if (movie.Value == "cg")
-                {
-
-                    this.Label1.Text = $"Picked for you because you love {favCast} " +
-                        $"and  this genre, {favGenre.ToLower()}";
-
-                }
-                else if (movie.Value == "dg")
-                {
-
-                    this.Label1.Text = $"Picked for you because you like a director{favDirector} " +
-                        $"and  this genre, {favGenre.ToLower()}";
-
-                }
-                else if (movie.Value == "c")
-                {
-
-                    this.Label1.Text = $"You love {favCast}, right?";
-
-                }
-
-                else if (movie.Value == "d")
-                {
-
-                    this.Label1.Text = $"You expect {favDirector}'s movie, right?";
-
-                }
-                else
-                {
-
-                    this.Label1.Text = $"You like this {favGenre.ToLower()}  movie, right?";
-
-                }
-
-            }
-
-            */
-
-            /*
-            if(recommended_title_images.Count != 0)
-            {
-                this.ImageButton1.ImageUrl = $"/images/{recommended_title_images[0]}.PNG";
-                this.ImageButton2.ImageUrl = $"/images/{recommended_title_images[1]}.PNG";
-                this.ImageButton3.ImageUrl = $"/images/{recommended_title_images[2]}.PNG";
-                this.ImageButton4.ImageUrl = $"/images/{recommended_title_images[3]}.PNG";
-                this.ImageButton5.ImageUrl = $"/images/{recommended_title_images[4]}.PNG";
-                //this.ImageButton6.ImageUrl = $"/images/{recommended_title_images[5]}.PNG";
-
-            }
-            else
-            {
-                Response.Write("No movies");
-            }
-            */
-
-
-            // Image Image2 = new Image();
-            // Image2.AlternateText = "test";
-            // Image2.Visible = true;
-            // Image2.ImageUrl = $"/images/{recommended_title_images[4]}.PNG";
-            // this.Controls.Add(Image2);
-
-            /*
-             
-             Image myImg = new Image();
-myImg.ImageUrl = "path_of_the_image.jpg";
-myImg.Visible = true;
-Panel1.Controls.Add(myImg);   //You can attach the image to any control on your page
-Or similarly:
-
-this.Controls.Add(myImg);     //Incase you wanted the image on your page controls
-Label1.Controls.Add(myImg);   //Incase you wanted the image to appear in a certain label
-             
-             */
-
-
-            //ImageMapEventHandler ie = new ImageMapEventHandler().; 
-
-
-            // = test_imageMap;
-
-            //  ImageButton ImageButton = new ImageButton();
-            //ImageButton.Visible = true;
-            //ImageButton.ImageUrl = $"/images/{recommended_title_images[3]}.PNG";
-
-            // ImageMap.HotSpotMode = HotSpotMode.PostBack;
-            // ImageButton.Click = new ImageEventHandler(test_imageMap);
-            // this.Controls.Add(ImageButton);
-
-
-            // this.HyperLink1.ImageUrl = $"/images/{recommended_title_images[3]}.PNG"; 
-            // this.HyperLink1.wi
-            //   $"/images/{recommended_title_images[count]}.PNG"
-
-            //this.Button1.Style["background-image"] = $"url(/images/{recommended_title_images[2]}.PNG)";
-
-            // Button btn = new Button();
-            // btn.Visible = true;
-            //this.Controls.Add(btn);
-            // testSpace.Style["background-image"] = "url(images/foo.png)";
-
-
-            //ImageButton img1 = new ImageButton();
-            //img1.ID = "ImageButton1";
-            //img1.ImageUrl = $"/images/{recommended_title_images[2]}.PNG";
-            //img1.Click += new ImageClickEventHandler(ImageButton1_Click);
-            //Panel1.Controls.Add(img1);
-        }
-        //background-image:url('Image/1.png')
-        //public void targetTest(string imageName)
-        //{
-          //  Response.("ddd");
-        //}
-
-        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-        {
-            Response.Write(e.ToString());
-            Response.Write(sender.ToString());
-                // ClientScript.RegisterStartupScript(this.GetType(), "ImageButton_Alert", "alert('ImageButton clicked!');", true);
-        }
-
+            Response.Redirect("description.aspx");
+            
+       }
+ 
     }
 
 }
