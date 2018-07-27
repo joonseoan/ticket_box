@@ -7,16 +7,20 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" autocomplete="on">
         <div>
             
             This is service page
-            
-            <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+            <!-- autocopl -->
+            <!-- <asp:Panel ID="Panel1" runat="server"> -->
+                <asp:Button ID="Button1" runat="server" Text="All Movies" OnClick="Button1_Click" />
+           <!-- </asp:Panel> -->
              <asp:Table ID="Table1" runat="server" BackColor="Black" ForeColor="White" HorizontalAlign="Center"></asp:Table>
 
         </div>
-        &nbsp;
+        
+
+        <asp:Button ID="Button2" runat="server" Text="Button" />
         
 
     </form>

@@ -95,6 +95,7 @@
     <Content Include="Movies.aspx" />
     <Content Include="Service.aspx" />
     <Content Include="Description.aspx" />
+    <Content Include="AllMovies.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -135,6 +136,13 @@
     </Compile>
     <Compile Include="Description.aspx.designer.cs">
       <DependentUpon>Description.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AllMovies.aspx.cs">
+      <DependentUpon>AllMovies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllMovies.aspx.designer.cs">
+      <DependentUpon>AllMovies.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

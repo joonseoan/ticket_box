@@ -91,6 +91,8 @@ namespace Movie_Ticket_Project
 
                     }
 
+                    cnn.Close();
+
                 }
                 catch (SqlException ex)
                 {
