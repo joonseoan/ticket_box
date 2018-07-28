@@ -12,29 +12,28 @@ namespace Movie_Ticket_Project
     public partial class WebForm1 : System.Web.UI.Page
     {
 
-        Boolean admin = false;
+        // Boolean admin = false;
         string admin_email;
         string admin_pw;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        protected void signup_Click(object sender, EventArgs e)
-        {
-
-            Response.Redirect("ProfileInput.aspx");
-
+            this.Image1.ImageUrl = "images/logo.PNG";
         }
 
         protected void submit_Click(object sender, EventArgs e)
         {
 
+            // Required field validation. Whent they are invalid, it will stop.
+            if (!this.RequiredFieldValidator1.IsValid ||
+                !this.RequiredFieldValidator2.IsValid ||
+                !this.RegularExpressionValidator1.IsValid) return;
+
+
             string email = this.TextBox1.Text.Trim();
             string password = this.TextBox2.Text.Trim();
 
-            if (!admin)
+            if (!this.CheckBox1.Checked)
             {
 
                 SqlConnection cnn;
@@ -62,7 +61,7 @@ namespace Movie_Ticket_Project
 
                             if (password == row["password"].ToString())
                             {
-
+                                    
                                 Session["FirstName"] = row["first_name"];
                                 Session["LastName"] = row["last_name"];
                                 Session["Genre"] = row["genre"];
@@ -76,8 +75,8 @@ namespace Movie_Ticket_Project
                             else
                             {
 
-                                this.Label1.Text = "You got a wrong password.";
-                                return;
+                                this.Label1.Text = "You got a wrong password";
+                                break;
 
                             }
 
@@ -85,7 +84,7 @@ namespace Movie_Ticket_Project
                         else
                         {
 
-                            this.Label1.Text = "You got a wrong customer name.";
+                            this.Label1.Text = "Your email ID is wrong";
 
                         }
 
@@ -116,10 +115,10 @@ namespace Movie_Ticket_Project
             else
             {
 
-                if (admin_email == email)
+                if (email == "admin@gmail.com")
                 {
 
-                    if (admin_pw == password)
+                    if (password == "12345678")
                     {
 
                         Response.Redirect("Movies.aspx");
@@ -128,7 +127,7 @@ namespace Movie_Ticket_Project
                     else
                     {
 
-                        this.Label1.Text = "You got a wrong password.";
+                        this.Label1.Text = "You got a wrong password";
                         return;
 
                     }
@@ -137,7 +136,7 @@ namespace Movie_Ticket_Project
                 else
                 {
 
-                    this.Label1.Text = "You got a wrong customer name.";
+                    this.Label1.Text = "You got a wrong admin ID";
 
                 }
 
@@ -145,13 +144,10 @@ namespace Movie_Ticket_Project
             
         }
 
-        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        protected void signup_Click(object sender, EventArgs e)
         {
 
-            admin_email = "admin@gmail.com";
-            admin_pw = "12345678";
-
-            admin = true;
+            Response.Redirect("ProfileInput.aspx");
 
         }
 

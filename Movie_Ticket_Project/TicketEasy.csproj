@@ -69,6 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="images\14a.PNG" />
+    <Content Include="images\18a.PNG" />
+    <Content Include="images\a.PNG" />
     <Content Include="images\Avengers.PNG" />
     <Content Include="images\Chronicle.PNG" />
     <Content Include="images\Dark_Shadows.PNG" />
@@ -83,6 +86,10 @@
     <Content Include="images\Iron_Man.PNG" />
     <Content Include="images\Jurassic_World.PNG" />
     <Content Include="images\Kung_Fu_Panda_2.PNG" />
+    <Content Include="images\g.PNG" />
+    <Content Include="images\logo.PNG" />
+    <Content Include="images\pg.PNG" />
+    <Content Include="images\r.PNG" />
     <Content Include="images\Sherlock_Holmes.PNG" />
     <Content Include="images\Shrek.PNG" />
     <Content Include="images\The_Notebook.PNG" />
@@ -95,7 +102,6 @@
     <Content Include="Movies.aspx" />
     <Content Include="Service.aspx" />
     <Content Include="Description.aspx" />
-    <Content Include="AllMovies.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -136,13 +142,6 @@
     </Compile>
     <Compile Include="Description.aspx.designer.cs">
       <DependentUpon>Description.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AllMovies.aspx.cs">
-      <DependentUpon>AllMovies.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AllMovies.aspx.designer.cs">
-      <DependentUpon>AllMovies.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

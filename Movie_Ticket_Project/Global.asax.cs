@@ -29,8 +29,8 @@ namespace Movie_Ticket_Project
           "genre VARCHAR(50) NOT NULL," +
           "director VARCHAR(50) NOT NULL," +
           "cast1 VARCHAR(50) NOT NULL," +
-          "cast2 VARCHAR(50)," +
-          "cast3 VARCHAR(50)," +
+          "cast2 VARCHAR(50) NOT NULL," +
+          "cast3 VARCHAR(50) NOT NULL," +
           "duration NUMERIC(3, 1) NOT NULL," +
           "synopsis VARCHAR(1000) NOT NULL," +
           "grade VARCHAR(50) NOT NULL)";

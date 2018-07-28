@@ -6,42 +6,55 @@
 <head runat="server">
     <title></title>
 </head>
-<body>
+<body style="background-color: black;">
 
-    <div>
+    <div style="text-align: center; color: white;">
+        <div>
 
-        <h1>Welcome to TicketEasy!</h1>
+            <h1 style="color: red; font-size: 60px">Welcome to TicketEasy!</h1>
 
-    </div>
-
-    <form id="form1" runat="server">
-       
-        <div style="margin-left: 400px">
-            <asp:Button ID="signup" runat="server" Text="Singup" OnClick="signup_Click" />
         </div>
-        <br />
-        <br />
-        <asp:Label ID="email" runat="server" Text="Email"></asp:Label>
-        <asp:TextBox ID="TextBox1" runat="server" autofocus></asp:TextBox>
-        <br />
-        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="TextBox1" Display="Dynamic" ErrorMessage="Please, enter email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" Display="Dynamic" ErrorMessage="Email must not be empty."></asp:RequiredFieldValidator>
-        <br />
-        <br />
-        <asp:Label ID="password" runat="server" Text="Password"></asp:Label>
-        <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
-        <br />
-        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="TextBox2" Display="Dynamic" ErrorMessage="You have to enter your password."></asp:RegularExpressionValidator>
-        <br />
-        <br />
-        <asp:Button ID="submit" runat="server" Text="Submit" OnClick="submit_Click" />
+
+        <form id="form1" runat="server">
        
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:CheckBox ID="CheckBox1" runat="server" Text="I am an administrator" OnCheckedChanged="CheckBox1_CheckedChanged" />
-        <p>
-            <asp:Label ID="Label1" runat="server"></asp:Label>
-        </p>
+            <div>
+            </div>
+            <br />
+            <asp:Image ID="Image1" runat="server" Height="300px" Width="300px" />
+            <br />
+            <br />
+            <asp:Label ID="email" runat="server" Text="Email"></asp:Label>
+            :
+            <asp:TextBox ID="TextBox1" runat="server" autofocus></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="password" runat="server" Text="Password"></asp:Label>
+            :
+            <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
+            <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="Please, fill out email ID" ForeColor="#FF66FF"></asp:RequiredFieldValidator>
+&nbsp;&nbsp;
+                <asp:Label ID="Label1" runat="server" ForeColor="#FF66FF"></asp:Label>
+            &nbsp;&nbsp;
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="TextBox1" Display="Dynamic" ErrorMessage="You must enter &quot;email&quot;" ForeColor="#FF66FF" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+            &nbsp;&nbsp;
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox2" ErrorMessage="Please, fill out your password" ForeColor="#FF66FF"></asp:RequiredFieldValidator>
+            <br />
+            <br />
+            <asp:Button ID="submit" runat="server" Text="Singin" OnClick="submit_Click" BackColor="#400080" BorderStyle="None" Font-Bold="True" Font-Italic="True" ForeColor="White" />
        
-    </form>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="signup" runat="server" Text="Singup" OnClick="signup_Click" BackColor="#003300" BorderStyle="None" Font-Bold="True" Font-Italic="True" ForeColor="White" />
+            &nbsp;
+            <br />
+            <br />
+            <asp:CheckBox ID="CheckBox1" runat="server" Text="I am an administrator" ForeColor="#CCCCCC" />
+            <p>
+                &nbsp;</p>
+       
+            </form>
+        </div>
 </body>
 </html>

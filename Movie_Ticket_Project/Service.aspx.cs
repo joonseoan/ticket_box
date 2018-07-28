@@ -244,6 +244,8 @@ namespace Movie_Ticket_Project
             favCast = Session["Cast"].ToString();
             custAge = Convert.ToInt32(Session["Age"]);
 
+            this.Button2.Enabled = false;
+
             try
             {
 
@@ -264,13 +266,22 @@ namespace Movie_Ticket_Project
                     movie_contents[9] = row["grade"].ToString().Trim();
                     movie_contents[10] = "preference";
 
-                    showList(movie_contents);
+                    if (IsPostBack)
+                    {
+
+                        validateAge(movie_contents);
+                        this.title.InnerText = "- All Movie List -";
+                    }
+                    else
+                    {
+                        showList(movie_contents);
+                        this.title.InnerText = "We Just Picked For You!";
+                    }
 
                 }
 
                 if (img.Count != 0)
                 {
-
 
                     int count = 0;
 
@@ -282,7 +293,6 @@ namespace Movie_Ticket_Project
 
                         movie.ID = movie_elements[count][0];
                         movie.ImageUrl = $"/images/{getImageName(movie_elements[count][0])}.PNG";
-                        //movie.PostBackUrl = "service.aspx";// $"/images/{getImageName(movie_elements[count][0])}.PNG";
                         movie.Visible = true;
                         movie.Click += new ImageClickEventHandler(ImageButton1_Click);
                         movie.Attributes["image"] = movie_elements[count][0];
@@ -312,53 +322,60 @@ namespace Movie_Ticket_Project
                         TableCell cell2 = new TableCell();
                         rows1.HorizontalAlign = HorizontalAlign.Center;
                         rows2.HorizontalAlign = HorizontalAlign.Center;
+                        
+                        if(!IsPostBack)
+                        {
+                            if (movie_elements[count][10] == "cdg")
+                            {
 
-                        // cell1.Text = movie_elements[count][10];
+                                cell1.Text = "100% perfect for you!";
 
-                        if (movie_elements[count][10] == "cdg")
+                            }
+                            else if (movie_elements[count][10] == "cd")
+                            {
+
+                                cell1.Text = $"Awesome {favCast} with {favDirector}";
+
+                            }
+                            else if (movie_elements[count][10] == "cg")
+                            {
+
+                                cell1.Text = $"{favCast} is the best in {favGenre.ToLower()} movie";
+
+                            }
+                            else if (movie_elements[count][10] == "dg")
+                            {
+
+                                cell1.Text = $"The best director, {favDirector}, for {favGenre.ToLower()}";
+
+                            }
+                            else if (movie_elements[count][10] == "c")
+                            {
+
+                                cell1.Text = $"You love {favCast}, right?";
+
+                            }
+
+                            else if (movie_elements[count][10] == "d")
+                            {
+
+                                cell1.Text = $"{favDirector} is adorable, right?";
+
+                            }
+                            else
+                            {
+
+                                cell1.Text = $"Your favorite {favGenre.ToLower()}!";
+
+                            }
+
+                        } else
                         {
 
-                            cell1.Text = "100% perfect for you!";
+                            cell1.Text = "";
 
                         }
-                        else if (movie_elements[count][10] == "cd")
-                        {
-
-                            cell1.Text = $"Awesome {favCast} with {favDirector}";
-
-                        }
-                        else if (movie_elements[count][10] == "cg")
-                        {
-
-                            cell1.Text = $"{favCast} is the best in {favGenre.ToLower()} movie";
-
-                        }
-                        else if (movie_elements[count][10] == "dg")
-                        {
-
-                            cell1.Text = $"The best harmoney, {favDirector} and {favGenre.ToLower()}";
-
-                        }
-                        else if (movie_elements[count][10] == "c")
-                        {
-
-                            cell1.Text = $"You love {favCast}, right?";
-
-                        }
-
-                        else if (movie_elements[count][10] == "d")
-                        {
-
-                            cell1.Text = $"{favDirector} is adorable, right?";
-
-                        }
-                        else
-                        {
-
-                            cell1.Text = $"Your favorite {favGenre.ToLower()}!";
-
-                        }
-
+                        
                         cell2.Controls.Add(movie);
 
                         cell2.Width = 300;
@@ -427,10 +444,24 @@ namespace Movie_Ticket_Project
         protected void Button1_Click(object sender, EventArgs e)
         {
 
-           // Response.Redirect("AllMovies.aspx");
+            this.Button1.Enabled = false;
+            this.Button2.Enabled = true;
         
         }
-       
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+
+            Server.Transfer("service.aspx", false);
+            this.Button1.Enabled = true;
+            this.Button2.Enabled = false;
+
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("Default.aspx");
+        }
     }
 
 }

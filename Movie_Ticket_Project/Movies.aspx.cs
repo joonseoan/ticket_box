@@ -36,6 +36,10 @@ namespace Movie_Ticket_Project
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            if (!RequiredFieldValidator1.IsValid || !RequiredFieldValidator2.IsValid
+                || !RequiredFieldValidator3.IsValid || !RequiredFieldValidator4.IsValid
+                || !RequiredFieldValidator5.IsValid || !RequiredFieldValidator6.IsValid
+                || !RequiredFieldValidator7.IsValid) return;
 
             SqlConnection cnn;
             SqlCommand command;
@@ -58,34 +62,12 @@ namespace Movie_Ticket_Project
                 command.Parameters.AddWithValue("@genre", this.DropDownList1.SelectedValue.ToString());
                 command.Parameters.AddWithValue("@director", this.TextBox2.Text.Trim());
                 command.Parameters.AddWithValue("@cast1", this.TextBox3.Text.Trim());
+                command.Parameters.AddWithValue("@cast2", this.TextBox4.Text.Trim());
+                command.Parameters.AddWithValue("@cast3", this.TextBox5.Text.Trim());
 
-                
-                if (!string.IsNullOrEmpty(this.TextBox4.Text))
-                {
-
-                    command.Parameters.AddWithValue("@cast2", this.TextBox4.Text.Trim());
-
-                } else
-                {
-
-                    command.Parameters.AddWithValue("@cast2", DBNull.Value);
-
-                }
-
-                if (!string.IsNullOrEmpty(this.TextBox5.Text))
-                {
-
-                    command.Parameters.AddWithValue("@cast3", this.TextBox5.Text.Trim());
-
-                }
-                else
-                {
-
-                    command.Parameters.AddWithValue("@cast3", DBNull.Value);
-
-                }
-
+                double movie_duration = Int32.Parse(this.TextBox6.Text);
                 command.Parameters.AddWithValue("@duration", this.TextBox6.Text.Trim());
+
                 command.Parameters.AddWithValue("@synopsis", this.TextBox7.Text.Trim());
                 command.Parameters.AddWithValue("@grade", this.DropDownList2.SelectedValue.ToString());
 
@@ -112,6 +94,10 @@ namespace Movie_Ticket_Project
                 this.Label1.Text = "Error in connection ! ";
                 
             }
+            catch(FormatException fe)
+            {
+                this.Label1.Text = "Youn entered invalid number";
+            }
 
             finally
             {
@@ -127,6 +113,10 @@ namespace Movie_Ticket_Project
 
         }
 
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("Default.aspx");
+        }
     }
 
 }

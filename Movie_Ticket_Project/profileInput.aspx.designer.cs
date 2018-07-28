@@ -40,15 +40,6 @@ namespace Movie_Ticket_Project {
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
-        /// first_name_validation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator first_name_validation;
-        
-        /// <summary>
         /// last_name control.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,15 @@ namespace Movie_Ticket_Project {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        
+        /// <summary>
+        /// first_name_validation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator first_name_validation;
         
         /// <summary>
         /// last_name_validation control.
@@ -148,13 +148,13 @@ namespace Movie_Ticket_Project {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator email_format_validation;
         
         /// <summary>
-        /// CustomValidator1 control.
+        /// Label13 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
+        protected global::System.Web.UI.WebControls.Label Label13;
         
         /// <summary>
         /// password1 control.

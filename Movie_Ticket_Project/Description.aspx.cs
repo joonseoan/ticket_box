@@ -23,27 +23,68 @@ namespace Movie_Ticket_Project
             string duration = Session["Duration_Desc"].ToString();
             string synopsis = Session["Synopsis_Desc"].ToString();
             string rating = Session["Rating_Desc"].ToString();
-            string preference = Session["Preference_Desc"].ToString();
+            //string preference = Session["Preference_Desc"].ToString();
 
-            this.title.InnerHtml = title;
-
+            this.title.InnerHtml = title + $" by {director}";
 
             this.Image1.Visible = true;
             this.Image1.ImageUrl = $"/images/{image}.PNG";
-            this.Image1.Width = 350;
-            this.Image1.Height = 500;
+            this.Image1.Width = 250;
+            this.Image1.Height = 350;
             this.Image1.BorderStyle = BorderStyle.Solid;
             this.Image1.BorderColor = System.Drawing.Color.Red;
 
-            this.synopsis.InnerText = synopsis;
-                //this.synopsis.Style(font);
+            string rating_image;
 
+            if (rating == "G")
+            {
+                rating_image = "g";  
+            }
+            else if (rating == "PG")
+            {
+                rating_image = "pg";
+            }
+
+            else if (rating == "14A")
+            {
+                rating_image = "14a";
+            }
+            else if (rating == "18A")
+            {
+                rating_image = "18a";
+            }
+            else if (rating == "R")
+            {
+                rating_image = "r";
+            }
+            else
+            {
+                rating_image = "a";
+            }
+
+            this.Image2.ImageUrl = $"/images/{rating_image}.PNG";
+
+            this.Label2.Text = $"Cast: {cast1} | {cast2}| {cast3}";
+            this.Label3.Text = $"Genre: {genre}";
+            this.Label1.Text = $"[{duration} hour(s)]: " + synopsis;
             
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Server.Transfer("service.aspx", true);
+            Server.Transfer("service.aspx", false);
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            this.Button2.PostBackUrl = "service.aspx";
+            Server.Transfer("service.aspx", false);
+
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("Default.aspx");
         }
     }
 }
