@@ -86,5 +86,10 @@ namespace Movie_Ticket_Project
         {
             Server.Transfer("Default.aspx");
         }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

@@ -34,7 +34,7 @@
         
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Back To Recommendation" BackColor="#FF0066" BorderStyle="None" Font-Bold="True" Font-Italic="True" ForeColor="White" Width="170px" />
         
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button3" runat="server" Text="Order" BackColor="#6600CC" BorderStyle="None" Font-Bold="True" Font-Italic="True" ForeColor="White" Width="250px" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button3" runat="server" Text="Order" BackColor="#6600CC" BorderStyle="None" Font-Bold="True" Font-Italic="True" ForeColor="White" Width="250px" OnClick="Button3_Click" />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         
             <asp:Button ID="Button2" runat="server" Text="Back To All Movies" OnClick="Button2_Click" BackColor="#FF9900" BorderStyle="None" Font-Bold="True" Font-Italic="True" ForeColor="White" />

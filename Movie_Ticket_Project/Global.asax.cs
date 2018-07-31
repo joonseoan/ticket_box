@@ -23,7 +23,7 @@ namespace Movie_Ticket_Project
         string connectionString = "Data Source=LAPTOP-EO2QHHSQ\\SQLEXPRESS;Initial Catalog=TicketEasy;Integrated Security=SSPI;Persist Security Info=False";
 
         // setup creating Movie table
-        /*
+        
         string createMovieDatabase = "CREATE TABLE dbo.MOVIES " +
           "(title VARCHAR(50) PRIMARY KEY," +
           "genre VARCHAR(50) NOT NULL," +
@@ -35,7 +35,7 @@ namespace Movie_Ticket_Project
           "synopsis VARCHAR(1000) NOT NULL," +
           "grade VARCHAR(50) NOT NULL)";
 
-        */
+        
 
         // setup creating Customer table
         string createCustomerDatabase = "CREATE TABLE dbo.CUSTOMERS " +
@@ -68,7 +68,7 @@ namespace Movie_Ticket_Project
             cnn = new SqlConnection(connectionString);
 
 
-            /*
+            
             // Creating CUSTOMERS table
             try
             {
@@ -100,7 +100,7 @@ namespace Movie_Ticket_Project
 
             }
 
-            */
+            
 
             // Creating Customer table
             try

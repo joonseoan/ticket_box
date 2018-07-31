@@ -13,6 +13,11 @@
 
     <form id="form1" runat="server">
         <div style ="text-align: center;">
+
+
+
+
+
             Movie Title:
             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
 &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="Required Field" ForeColor="Red"></asp:RequiredFieldValidator>
